@@ -110,13 +110,13 @@ export default function Home() {
         setVerifyResult({
           verified: data.verified,
           localRoot: data.localRoot,
+          onChainRoot: data.onChainRoot,
+          match: data.match,
           vectorCount: data.vectorCount,
           message: data.match
             ? `Local root matches on-chain root. ${data.vectorCount} vectors verified on Solana.`
-            : "Root mismatch — memory may have been tampered with.",
+            : 'Root mismatch — memory may have been tampered with.',
           solanaExplorerUrl: data.solanaExplorerUrl,
-          onChainRoot: data.onChainRoot,
-          match: data.match,
         });
       } else {
         setError(data.error || "Failed to verify");
@@ -760,7 +760,31 @@ export default function Home() {
                     <div style={{ fontSize: 12, color: "#c4a882" }}>
                       {verifyResult.message}
                     </div>
+                    
                   </div>
+                  {verifyResult.solanaExplorerUrl && (
+                    
+                    <a
+                    href={verifyResult.solanaExplorerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "block",
+                      background: "#080604",
+                      border: "1px solid #1a0e08",
+                      borderRadius: 6,
+                      padding: "10px 14px",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <div style={{ fontSize: 9, color: "#5a3a20", marginBottom: 4 }}>
+                      SOLANA EXPLORER
+                    </div>
+                    <div style={{ fontSize: 11, color: "#c2692a" }}>
+                      View on-chain proof ↗
+                    </div>
+                  </a>
+                )}
                 </div>
               </div>
             )}
